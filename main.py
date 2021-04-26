@@ -13,7 +13,7 @@ class Bot:
         self.dp = self.updater.dispatcher
 
     def start(self, update, context):
-        reply_keyboard = [['/first_level']]
+        reply_keyboard = [['Давай начнём!']]
         markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
         update.message.reply_text(
             "Привет! Я ПепеБот. Я могу предложить тебе незабываемое путешествие, в котором будет полно опасностей и "
@@ -146,7 +146,7 @@ class Bot:
 
         text = result[0][0]
 
-        reply_keyboard = [['/start']]
+        reply_keyboard = [['Начать заново']]
         markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
 
         update.message.reply_text(text, reply_markup=markup)
@@ -162,7 +162,7 @@ class Bot:
         result = self.cursor.execute("""SELECT answer FROM dead_answers""").fetchall()
         text = result[random_n][0]
 
-        reply_keyboard = [['/start']]
+        reply_keyboard = [['Начать заново']]
         markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
 
         update.message.reply_text(text, reply_markup=markup)
@@ -184,14 +184,14 @@ class Bot:
         self.db.close()
 
     def exit(self, update, context):
-        self.db = sqlite3.connect("uestions.db")
+        self.db = sqlite3.connect("questions.db")
         self.cursor = self.db.cursor()
 
         result = self.cursor.execute("""SELECT question FROM levels WHERE level = 6""").fetchall()
 
         text = result[0][0]
 
-        reply_keyboard = [['/start']]
+        reply_keyboard = [['Начать заново']]
         markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
 
         update.message.reply_text(text, reply_markup=markup)
